@@ -1,0 +1,13 @@
+{
+  "name": "Caja y combustibles",
+  "short_name": "Bomba",
+  "description": "Control diario de caja y combustibles.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#101611",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
