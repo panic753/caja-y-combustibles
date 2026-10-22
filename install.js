@@ -30,6 +30,10 @@
     installEvent = event;
   });
 
-  window.addEventListener('load', () => document.body.append(button));
+  const mount = () => {
+    if (!button.isConnected) document.body.append(button);
+  };
+  if (document.body) mount();
+  else document.addEventListener('DOMContentLoaded', mount, { once: true });
 })();
 
