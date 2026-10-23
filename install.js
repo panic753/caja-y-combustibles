@@ -35,5 +35,24 @@
   };
   if (document.body) mount();
   else document.addEventListener('DOMContentLoaded', mount, { once: true });
+
+  const showUpdate = registration => {
+    if (!registration.waiting) return;
+    button.textContent = 'Actualizar app';
+    button.onclick = () => registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+    mount();
+  };
+  navigator.serviceWorker?.getRegistration().then(registration => {
+    if (!registration) return;
+    showUpdate(registration);
+    registration.addEventListener('updatefound', () => {
+      const worker = registration.installing;
+      worker?.addEventListener('statechange', () => {
+        if (worker.state === 'installed' && navigator.serviceWorker.controller) showUpdate(registration);
+      });
+    });
+    registration.update();
+  });
+  navigator.serviceWorker?.addEventListener('controllerchange', () => window.location.reload());
 })();
 
