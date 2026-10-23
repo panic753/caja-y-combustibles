@@ -39,7 +39,12 @@
   const showUpdate = registration => {
     if (!registration.waiting) return;
     button.textContent = 'Actualizar app';
-    button.onclick = () => registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+    button.onclick = async () => {
+      const waiting = registration.waiting;
+      if (!waiting) return;
+      waiting.postMessage({ type: 'SKIP_WAITING' });
+      setTimeout(() => window.location.reload(), 1200);
+    };
     mount();
   };
   navigator.serviceWorker?.getRegistration().then(registration => {
