@@ -1,11 +1,10 @@
 (() => {
   const installed = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
-  if (installed) return;
 
   let installEvent;
   const button = document.createElement('button');
   button.type = 'button';
-  button.textContent = 'Instalar app';
+  button.textContent = installed ? 'Buscar actualización' : 'Instalar app';
   button.setAttribute('aria-label', 'Instalar Caja y combustibles como aplicación');
   Object.assign(button.style, {
     position: 'fixed', right: '18px', bottom: '18px', zIndex: '9999',
@@ -15,6 +14,19 @@
   });
 
   button.addEventListener('click', async () => {
+    if (installed) {
+      const registration = await navigator.serviceWorker?.getRegistration();
+      if (registration) {
+        await registration.update();
+        if (registration.waiting) {
+          registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+          setTimeout(() => window.location.reload(), 1200);
+        } else {
+          alert('La app ya está actualizada.');
+        }
+      }
+      return;
+    }
     if (installEvent) {
       installEvent.prompt();
       await installEvent.userChoice;
