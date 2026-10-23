@@ -7,9 +7,9 @@
   button.textContent = installed ? 'Buscar actualización' : 'Instalar app';
   button.setAttribute('aria-label', 'Instalar Caja y combustibles como aplicación');
   Object.assign(button.style, {
-    position: 'fixed', right: '18px', bottom: '18px', zIndex: '9999',
-    border: '1px solid #65d99b', borderRadius: '999px', padding: '12px 18px',
-    background: '#163524', color: '#fff', font: '700 14px system-ui, sans-serif',
+    position: 'fixed', top: '18px', right: '160px', zIndex: '9999',
+    border: '1px solid #65d99b', borderRadius: '999px', padding: '9px 12px',
+    background: '#163524', color: '#fff', font: '700 12px system-ui, sans-serif',
     boxShadow: '0 8px 28px rgba(0,0,0,.42)', cursor: 'pointer'
   });
 
