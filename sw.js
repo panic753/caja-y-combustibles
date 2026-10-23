@@ -1,4 +1,4 @@
-const CACHE = "caja-combustibles-v3";
+const CACHE = "caja-combustibles-v4";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./install.js"];
 
 self.addEventListener("install", event => {
