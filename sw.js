@@ -1,9 +1,12 @@
-const CACHE = "caja-combustibles-v4";
+const CACHE = "caja-combustibles-v5";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./install.js"];
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)));
-  self.skipWaiting();
+});
+
+self.addEventListener("message", event => {
+  if (event.data?.type === "SKIP_WAITING") self.skipWaiting();
 });
 
 self.addEventListener("activate", event => {
