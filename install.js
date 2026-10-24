@@ -7,10 +7,9 @@
   button.textContent = installed ? 'Buscar actualización' : 'Instalar app';
   button.setAttribute('aria-label', 'Instalar Caja y combustibles como aplicación');
   Object.assign(button.style, {
-    position: 'fixed', top: window.innerWidth < 600 ? '145px' : '18px', right: window.innerWidth < 600 ? '18px' : '160px', zIndex: '9999',
     border: '1px solid #42694f', borderRadius: '8px', padding: '10px 15px',
     background: '#284c39', color: '#d0ddcf', font: '600 14px system-ui, sans-serif',
-    boxShadow: '0 8px 28px rgba(0,0,0,.42)', cursor: 'pointer'
+    boxShadow: '0 8px 28px rgba(0,0,0,.42)', cursor: 'pointer', whiteSpace: 'nowrap'
   });
 
   button.addEventListener('click', async () => {
@@ -43,7 +42,21 @@
   });
 
   const mount = () => {
-    if (!button.isConnected) document.body.append(button);
+    if (button.isConnected) return;
+    const newTurn = document.getElementById('new');
+    const header = newTurn?.parentElement;
+    if (!newTurn || !header) return document.body.append(button);
+    let actions = document.getElementById('app-update-actions');
+    if (!actions) {
+      actions = document.createElement('div');
+      actions.id = 'app-update-actions';
+      Object.assign(actions.style, {
+        display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'stretch'
+      });
+      header.insertBefore(actions, newTurn);
+      actions.append(newTurn);
+    }
+    actions.append(button);
   };
   if (document.body) mount();
   else document.addEventListener('DOMContentLoaded', mount, { once: true });
