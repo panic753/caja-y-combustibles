@@ -8,8 +8,8 @@
   button.setAttribute('aria-label', 'Instalar Caja y combustibles como aplicación');
   Object.assign(button.style, {
     position: 'fixed', top: '18px', right: '160px', zIndex: '9999',
-    border: '1px solid #65d99b', borderRadius: '999px', padding: '9px 12px',
-    background: '#163524', color: '#fff', font: '700 12px system-ui, sans-serif',
+    border: '1px solid #42694f', borderRadius: '8px', padding: '10px 15px',
+    background: '#284c39', color: '#d0ddcf', font: '600 14px system-ui, sans-serif',
     boxShadow: '0 8px 28px rgba(0,0,0,.42)', cursor: 'pointer'
   });
 
